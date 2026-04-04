@@ -7,6 +7,7 @@ import Home from "@/pages/Home";
 import AllProjects from "@/pages/AllProjects";
 import CaseStudies from "@/pages/Casestudies";
 import NotFound from "@/pages/not-found";
+import Survey from "./pages/Survey";
 
 const queryClient = new QueryClient();
 
