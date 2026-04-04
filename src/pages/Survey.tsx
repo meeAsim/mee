@@ -3,27 +3,26 @@ import { useState, useEffect } from "react";
 export default function Survey() {
   const [agreed, setAgreed] = useState(false);
   const [submitted, setSubmitted] = useState(false);
-  const [language, setLanguage] = useState("np"); // default Nepali
+
+  // ✅ FIX: strict type
+  const [language, setLanguage] = useState<"np" | "en">("np");
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const name = params.get("name");
-
-    
   }, []);
 
   const text = {
     np: {
       title: (
-  <span>
-    यो सर्वेक्षण{" "}
-    <span className="text-2xl font-display font-bold text-red-400 tracking-wide"
-          >
+        <span>
+          यो सर्वेक्षण{" "}
+          <span className="text-2xl font-display font-bold text-red-400 tracking-wide">
             Mee<span className="text-primary">.</span>
-          </span>
-    {" "}द्वारा सञ्चालित छ।
-  </span>
-),
+          </span>{" "}
+          द्वारा सञ्चालित छ।
+        </span>
+      ),
       desc: "कृपया अगाडि बढ्नु अघि यो सर्वेक्षणमा सहभागी हुन सहमति दिनुहोस्।",
       agree: "म यो सर्वेक्षणमा सहभागी हुन सहमत छु",
       proceed: "सर्वेक्षण सुरु गर्नुहोस्",
@@ -32,16 +31,14 @@ export default function Survey() {
       chooseLang: "भाषा छान्नुहोस्",
     },
     en: {
-      title:(
-  <span>
-    This Survey powered by{" "}
-    <span className="text-2xl font-display font-bold text-red-400 tracking-wide"
-          >
+      title: (
+        <span>
+          This Survey powered by{" "}
+          <span className="text-2xl font-display font-bold text-red-400 tracking-wide">
             Mee<span className="text-primary">.</span>
           </span>
-    {" "}
-  </span>
-),
+        </span>
+      ),
       desc: "Please acknowledge before proceeding to the survey.",
       agree: "I agree to participate in this survey",
       proceed: "Proceed to Survey",
@@ -51,10 +48,12 @@ export default function Survey() {
     },
   };
 
+  // ✅ Now works (typed correctly)
   const t = text[language];
 
   const handleProceed = () => {
-    const surveyLinks = {
+    // ✅ FIX: typed object
+    const surveyLinks: Record<"np" | "en", string> = {
       np: "https://forms.gle/3kbAERwvn5px6WkD8",
       en: "https://forms.gle/3kbAERwvn5px6WkD8",
     };
@@ -78,19 +77,24 @@ export default function Survey() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-black text-white px-6">
       <div className="max-w-xl bg-white/5 border border-white/10 rounded-2xl p-8 text-center">
-      <div className="flex flex-col mb-6">
+        
+        {/* Logo */}
+        <div className="flex flex-col mb-6">
           <a
             href="/"
-            onClick={(e) => { e.preventDefault(); navigate("/"); }}
+            onClick={(e) => {
+              e.preventDefault();
+              window.location.href = "/"; // ✅ FIXED (removed navigate)
+            }}
             className="text-2xl font-display font-bold text-foreground tracking-wide"
           >
             Mee<span className="text-primary">.</span>
           </a>
+
           <span className="hidden sm:block text-[10px] text-muted-foreground uppercase tracking-widest font-semibold mt-0.5">
             Digital Ads and Marketing
           </span>
         </div>
-        
 
         {/* Language selector */}
         <div className="mb-6">
@@ -140,7 +144,6 @@ export default function Survey() {
         >
           {t.proceed}
         </button>
-
       </div>
     </div>
   );
