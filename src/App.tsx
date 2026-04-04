@@ -13,10 +13,12 @@ const queryClient = new QueryClient();
 function Router() {
   return (
     <Switch>
-      <Route path="/" component={Home} />
+     <Route path="/" component={Home} />
       <Route path="/projects" component={AllProjects} />
       <Route path="/casestudies" component={CaseStudies} />
+      <Route path="/survey" component={Survey} />
       <Route component={NotFound} />
+    
     </Switch>
   );
 }
