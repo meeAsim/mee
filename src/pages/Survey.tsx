@@ -5,7 +5,7 @@ export default function Survey() {
   const [agreed, setAgreed] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
-  // ✅ FIX: strict type
+ 
   const [language, setLanguage] = useState<"np" | "en">("np");
 
   useEffect(() => {
@@ -49,11 +49,11 @@ export default function Survey() {
     },
   };
 
-  // ✅ Now works (typed correctly)
+
   const t = text[language];
 
   const handleProceed = () => {
-    // ✅ FIX: typed object
+  
     const surveyLinks: Record<"np" | "en", string> = {
       np: "https://forms.gle/3kbAERwvn5px6WkD8",
       en: "https://forms.gle/3kbAERwvn5px6WkD8",
@@ -85,7 +85,7 @@ export default function Survey() {
             href="/"
             onClick={(e) => {
               e.preventDefault();
-              window.location.href = "/"; // ✅ FIXED (removed navigate)
+              window.location.href = "/";
             }}
             className="text-2xl font-display font-bold text-foreground tracking-wide"
           >
@@ -156,7 +156,7 @@ export default function Survey() {
   const [agreed, setAgreed] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
-  // ✅ FIX: strict type
+
   const [language, setLanguage] = useState<"np" | "en">("np");
 
   useEffect(() => {
@@ -200,11 +200,11 @@ export default function Survey() {
     },
   };
 
-  // ✅ Now works (typed correctly)
+
   const t = text[language];
 
   const handleProceed = () => {
-    // ✅ FIX: typed object
+  
     const surveyLinks: Record<"np" | "en", string> = {
       np: "https://forms.gle/3kbAERwvn5px6WkD8",
       en: "https://forms.gle/3kbAERwvn5px6WkD8",
@@ -236,7 +236,7 @@ export default function Survey() {
             href="/"
             onClick={(e) => {
               e.preventDefault();
-              window.location.href = "/"; // ✅ FIXED (removed navigate)
+              window.location.href = "/"; 
             }}
             className="text-2xl font-display font-bold text-foreground tracking-wide"
           >
