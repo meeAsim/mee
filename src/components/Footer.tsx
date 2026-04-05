@@ -4,6 +4,7 @@ import { Link } from "wouter";
 import { Contact } from "@/components/Contact";
 import { allProjects } from "@/data/projects";
 import CaseStudies  from "@/pages/Casestudies";
+import SUrvey  from "@/pages/Survey";
 
 const socialLinks = [
   { icon: Facebook, link: "https://www.facebook.com/people/MeeDigital/61562769357063" },
@@ -66,7 +67,7 @@ export function Footer() {
               { label: "About Us", href: "/about" },
               { label: "Careers", href: "/careers" },
               { label: "Case Studies", href: "/Casestudies" },
-              { label: "Blog", href: "/blog" },
+              { label: "Survey", href: "/survey" },
               { label: "Contact" }, // no href
             ].map((item) => (
               <li key={item.label}>
