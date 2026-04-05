@@ -7,6 +7,10 @@ export default function Survey() {
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
+
+    // ✅ Detect submitted from URL
+    setSubmitted(params.get("submitted") === "true");
+
     const name = params.get("name");
     // You can use `name` if needed
   }, []);
@@ -26,7 +30,7 @@ export default function Survey() {
       agree: "म यो सर्वेक्षणमा सहभागी हुन सहमत छु",
       proceed: "सर्वेक्षण सुरु गर्नुहोस्",
       thank: "धन्यवाद",
-      thankDesc: "हामी तपाईंको प्रतिक्रिया प्रति आभारी छौं।",
+      thankDesc: "हाम्रो सर्वेक्षणमा सहभागी भईदिनुभएकोमा हार्दिक धन्यवाद। तपाईंले दिनुभएको समय र महत्वपूर्ण सुझावहरूको हामी उच्च कदर गर्दछौं। तपाईंको योगदानले हाम्रो काम सुधार गर्न महत्वपूर्ण सहयोग पुर्‍याउनेछ।",
       chooseLang: "भाषा छान्नुहोस्",
     },
     en: {
@@ -42,7 +46,7 @@ export default function Survey() {
       agree: "I agree to participate in this survey",
       proceed: "Proceed to Survey",
       thank: "Thank you",
-      thankDesc: "We appreciate your valuable feedback.",
+      thankDesc: "Thank you for your participation in our survey. We truly appreciate the time and effort you took to share your valuable insights. Your contribution is important to us and will help us improve our work.",
       chooseLang: "Choose Language",
     },
   };
@@ -54,15 +58,43 @@ export default function Survey() {
       np: "https://forms.gle/3kbAERwvn5px6WkD8",
       en: "https://forms.gle/3kbAERwvn5px6WkD8",
     };
+
     window.location.href = surveyLinks[language];
   };
 
+  // ✅ Show ONLY thank you screen if submitted=true
   if (submitted) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-black text-white">
-        <div className="text-center">
-          <h1 className="text-lg font-bold mb-4">{t.thank} ! 🎉</h1>
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-black to-gray-900 text-white px-6">
+        <div className="max-w-lg w-full bg-white/5 backdrop-blur-md border border-white/10 rounded-3xl p-10 text-center shadow-xl">
+          <div className="flex flex-col mb-6">
+          <a
+            href="/"
+            onClick={(e) => {
+              e.preventDefault();
+              window.location.href = "/";
+            }}
+            className="text-4xl font-display font-bold text-foreground tracking-wide"
+          >
+            Mee<span className="text-primary">.</span>
+          </a>
+
+          <span className="hidden sm:block text-[10px] text-muted-foreground uppercase tracking-widest font-semibold mt-0.5">
+            Digital Ads and Marketing
+          </span>
+        </div>
+          <h1 className="text-lg font-bold mb-4">
+            {t.thank} ! 🎉
+          </h1>
           <p className="text-gray-400">{t.thankDesc}</p>
+
+          {/* Optional: Go back home */}
+          <button
+            onClick={() => (window.location.href = "/")}
+            className="mt-6 px-4 py-2 bg-purple-600 rounded hover:bg-purple-700"
+          >
+            Home
+          </button>
         </div>
       </div>
     );
